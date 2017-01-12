@@ -1,18 +1,18 @@
 /* **********************************
 * 
-* Custom Directed Graph for Page Rank
+*  Custom Directed Graph for Page Rank
 *
-* This data structure makes use of a modified version of
-* and adjacency list. 
+*  This data structure makes use of a modified version of
+*  and adjacency list. 
 *		
-*	For an index I in the array, the nodes in the unorderedLinkedList 
-*		represent the webpages that point to element I.
+*  For an index I in the array, the nodes in the unorderedLinkedList 
+*  represent the webpages that point to element I.
 *
-*	In addition, an extra unorderedLinkedList is used for the set of
-*		Sink nodes.
+*  In addition, an extra unorderedLinkedList is used for the set of
+*  Sink nodes.
 * 
 * 
-* By Javier Llerenas
+*  By Javier Llerenas
 *
 ** ******************************* */
 

@@ -1,6 +1,16 @@
-// *****************
-// avl WEB
-// *****************/
+/* **********************************
+* 
+*  Implementation of a custom version of an avlTree
+*  that maintains only the largest elements in 
+*  the tree, up to a LIMIT number of elements
+*
+*  The purpose of this data structure is to 
+*  be able to efficiently sort a list of elements
+*  and print the LIMIT amount of greatest elements
+*
+*  By Javier Llerenas
+*
+** ******************************* */
 
 #include "avlWeb.h"
 #include <iostream>
@@ -41,7 +51,6 @@ void avlWeb::insert(const long double pr, const unsigned int pn)
 //Postcondition: the item is added and nodeCount++
 {
     if (!this->isFull()) {
-        cout << "Tree is NOT full; inserting " << pr << endl;
 
         rankNode rn;
         rn.pr = pr;
@@ -52,10 +61,9 @@ void avlWeb::insert(const long double pr, const unsigned int pn)
         maxNode = max(maxNode, pr);
 
         nodeCount++;
-        cout << "Nodecount is now: " << nodeCount << endl;
+        
     } else if (maxNode < pr) {
-        cout << "Tree is FULL; but max: " << maxNode
-             << " is greater than pr: " << pr << endl;
+
         deleteMax();
         
         rankNode rn;
@@ -66,7 +74,6 @@ void avlWeb::insert(const long double pr, const unsigned int pn)
         maxNode = max(maxNode, pr);
         
         nodeCount++;
-        cout << "Nodecount is now: " << nodeCount << endl;
     } 
 }
     
@@ -141,17 +148,18 @@ treeNode<rankNode>* avlWeb::deleteMax(treeNode<rankNode>* nd)
 {
     if (nd->right->right == NULL)
         maxNode = nd->item.pr;       //get new max
-
+    
     if (nd->right == NULL) {      //if is the last node
-
+        
         treeNode<rankNode> *tmp;
         tmp = nd->left;  //save left node
         
         delete nd;       //delete max node
         nd = NULL;
         return tmp;      //return left
-
-    } else nd->right = deleteMax(nd->right); //recurse right
+        
+    } else
+        nd->right = deleteMax(nd->right); //recurse right
 }
 
 void avlWeb::print(treeNode<rankNode>* nd)
@@ -175,6 +183,10 @@ void avlWeb::print(treeNode<rankNode>* nd)
 
 void avlWeb::printLimit()
 {
-    cout << "LIMIT: " << limit << endl
-         << "NodeC: " << this->nodeCount << endl << endl;
+    string stars;
+    stars.append(40, '*');
+    cout << stars << endl
+         << "Limit: " << limit << endl
+         << "Node Count: " << this->nodeCount << endl
+         << endl;
 }

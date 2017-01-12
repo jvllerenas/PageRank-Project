@@ -1,18 +1,18 @@
 /* **********************************
 * 
-* Custom Directed Graph for Page Rank
+*  Custom Directed Graph for Page Rank
 *
-* This data structure makes use of a modified version of
-* and adjacency list. 
+*  This data structure makes use of a modified version of
+*  and adjacency list. 
 *		
-*	For an index I in the array, the nodes in the unorderedLinkedList 
-*		represent the webpages that point to element I.
+*  For an index I in the array, the nodes in the unorderedLinkedList 
+*  represent the webpages that point to element I.
 *
-*	In addition, an extra unorderedLinkedList is used for the set of
-*		Sink nodes.
+*  In addition, an extra unorderedLinkedList is used for the set of
+*  Sink nodes.
 * 
 * 
-* By Javier Llerenas
+*  By Javier Llerenas
 *
 ** ******************************* */
 
@@ -41,7 +41,7 @@ webGraph::~webGraph()
 //Deletes all elements if the graph
 //Postcondition: the graph and linkedList are destroyed
 {
-	for (int i = 0;  i < vertexCount; i++)
+	for (unsigned i = 0;  i < vertexCount; i++)
 		webpages[i].inLinks.destroyList();
 	
 	delete [] webpages;
@@ -75,7 +75,7 @@ bool webGraph::readGraph(string filename)
         in.ignore(256, '\n'); 	//ignores 4th line
         
         webpages = new webNode[vertexCount];
-        for (int i = 0; i < vertexCount; ++i) 
+        for (unsigned i = 0; i < vertexCount; ++i) 
             webpages[i].outLinks = 0; 		//Set outLinks to 0
         
         // Populate webpages graph
@@ -91,7 +91,7 @@ bool webGraph::readGraph(string filename)
         }
         
         //set SinkSet
-        for (int i = 0; i < vertexCount; i++) 
+        for (unsigned i = 0; i < vertexCount; i++) 
             if (webpages[i].outLinks == 0) {
                 sinkSet.insert(i);
             }
@@ -107,9 +107,6 @@ void webGraph::showGraphStats()
 		 << "\tTitle: " << title << endl
 		 << "\tNodes: " << vertexCount << endl
 		 << "\tEdges: " << edgeCount << endl << endl;
-
-    rankedPages.printLimit();
-    
 }
 
 void webGraph::findPageRanks()
@@ -125,7 +122,7 @@ void webGraph::findPageRanks()
     linkedListIterator<unsigned> end;
 
 	//initial setup
-	for (int i=0; i < vertexCount; i++)		
+	for (unsigned i = 0; i < vertexCount; i++)		
 		webpages[i].pr = tmp;
 
     
@@ -143,7 +140,7 @@ void webGraph::findPageRanks()
 		}
         
 		//LOOP2. For each page in webpages
-		for (int k = 0; k <  vertexCount; k++) 
+		for (unsigned k = 0; k <  vertexCount; k++) 
             {	
                 webpages[k].newPR = (1 - double(d)) / double(vertexCount);		//damping
                 webpages[k].newPR += d * sinkPR / double(vertexCount);	//spread sinkPRevenly
@@ -159,11 +156,9 @@ void webGraph::findPageRanks()
             }
         
 		//LOOP3
-		for (int m=0; m < vertexCount; m++)
+		for (unsigned m = 0; m < vertexCount; m++)
 			webpages[m].pr = webpages[m].newPR;
 	}//end for
-	//min.destroy();
-    cout << "Finished calculating PRS" << endl << endl;
 }
 
 void webGraph::displayPageRanks(int number) 
@@ -172,39 +167,15 @@ void webGraph::displayPageRanks(int number)
 //Postcondition: LIMIT number of webpages are displayed to screen	
 //Precondition: findPageRanks() must have previously been executed
 {
-    for (int idx = 0; idx < vertexCount; idx++) 
+    for (unsigned idx = 0; idx < vertexCount; idx++) 
         rankedPages.insert(webpages[idx].pr, idx);
-    
+
+    rankedPages.printLimit();
     rankedPages.print();
 }
 
 void webGraph::print() const
 //Function used for mere testing purposes
 {
-    /*
-      cout << "LINKS:\n";
-      linkedListIterator<short> start;
-      
-      for (int i = 0; i < vertexCount; i++) {
-      cout << i << "| ";
-      
-      start = (webpages[i].inLinks.begin());
-      while (start != webpages[i].inLinks.end())
-      {
-      cout << " <- " << *start;
-      ++start;
-      }
-      cout << endl;
-      }	
-      
-      cout << "SINK NODES: "; 
-      
-      start = sinkSet.begin();
-      while (start != sinkSet.end()) {
-		cout << *start << " | ";
-		++start;
-        }
-        
-        cout << endl << endl;
-    */	
+
 }

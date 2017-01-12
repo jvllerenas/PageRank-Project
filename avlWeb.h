@@ -1,6 +1,16 @@
-// *****************
-// avl WEB
-// *****************/
+/* **********************************
+* 
+*  Definition of a custom version of an avlTree
+*  that maintains only the largest elements in 
+*  the tree, up to a LIMIT number of elements
+*
+*  The purpose of this data structure is to 
+*  be able to efficiently sort a list of elements
+*  and print the LIMIT amount of greatest elements
+*
+*  By Javier Llerenas
+*
+** ******************************* */
 
 #ifndef H_AVLWEB
 #define H_AVLWEB

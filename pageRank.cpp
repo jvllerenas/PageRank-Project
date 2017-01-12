@@ -1,8 +1,16 @@
+//***************************************************
+//
 // CS 302
 // Final Project, Google Page Rank Algorithm
 
-// Note, must use C++11 compiler option
-//	g++ -Wall -Wpedantic -g -std=c++11
+// Note: use make to create the 'out' executable
+//
+// Usage: ./out web1.txt
+//        ./out web2.txt
+//
+// Submission by Javier Llerenas
+//
+//***************************************************
 
 #include <iostream>
 #include <string>
@@ -56,9 +64,7 @@ int main(int argc, char *argv[])
 
 	if (myGraph.readGraph(graphFile)) {
         myGraph.showGraphStats();
-        cout << "ABout to find page ranks" << endl;
 		myGraph.findPageRanks();
-        cout << "FOund page ranks" << endl;
 		myGraph.displayPageRanks(10);
         
 	} else {
